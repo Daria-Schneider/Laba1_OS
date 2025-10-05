@@ -1,0 +1,78 @@
+# ==================== #
+# Файлы сборки CMake   #
+# ==================== #
+
+# Автогенерируемые CMake файлы
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Директории сборки (но не удаляйте из репозитория пустые папки!)
+build/
+lib/
+bin/
+
+# ==================== #
+# Исполняемые файлы    #
+# ==================== #
+
+# Linux/Unix
+parent
+child
+*.o
+*.a
+*.so
+*.out
+
+# Windows
+*.exe
+*.dll
+*.lib
+*.exp
+*.ilk
+*.pdb
+
+# macOS
+*.dylib
+.DS_Store
+
+# ==================== #
+# Файлы IDE/редакторов #
+# ==================== #
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# CLion
+.idea/
+cmake-build-*/
+
+# Visual Studio
+*.sln
+*.vcxproj*
+*.vcxproj.filters
+x64/
+x86/
+Debug/
+Release/
+Win32/
+
+# ==================== #
+# Временные файлы      #
+# ==================== #
+
+# Резервные копии
+*~
+*.bak
+*.backup
+
+# Логи
+*.log
+
+# Файлы данных программы (если создаются)
+*.txt
+*.dat
+!README.md  # Исключение - README.md НЕ игнорировать

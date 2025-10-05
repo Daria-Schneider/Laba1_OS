@@ -1,0 +1,36 @@
+\section{Результаты}
+
+В результате работы была разработана кроссплатформенная программа для межпроцессного взаимодействия, успешно функционирующая как в Windows, так и в Unix-подобных операционных системах.
+
+\subsection{Ключевые особенности реализации}
+
+\begin{itemize}
+    \item \textbf{Кроссплатформенная архитектура:} Программа использует единый код для различных ОС благодаря системе абстракций в модуле \texttt{cross\_platform}
+    \item \textbf{Поддержка Unicode:} Реализована проверка заглавных букв как для латинского алфавита (ASCII), так и для кириллицы (UTF-8)
+    \item \textbf{Асинхронная обработка ошибок:} Родительский процесс проверяет канал ошибок без блокировки основного потока выполнения
+    \item \textbf{Корректное управление ресурсами:} Обеспечено правильное закрытие дескрипторов каналов и процессов при завершении работы
+\end{itemize}
+
+\subsection{Пример работы программы}
+
+\begin{verbatim}
+Enter file name: output.txt
+Enter string (empty string to exit): hello world
+Child: Error: string must start with capital letter - 'hello world'
+Enter string (empty string to exit): MAI
+Enter string (empty string to exit): 123Start
+Child: Error: string must start with capital letter - '123Start'
+Enter string (empty string to exit): Aviation
+Enter string (empty string to exit):
+Parent process finished.
+\end{verbatim}
+
+\noindent\textbf{Содержимое файла output.txt:}
+\begin{verbatim}
+MAI
+Aviation
+\end{verbatim}
+
+\subsection{Производительность}
+
+Программа демонстрирует стабильную работу при обработке строк различной длины. Время отклика системы на ввод пользователя практически не отличается от времени работы обычных консольных приложений, что подтверждает эффективность выбранного подхода к организации межпроцессного взаимодействия.

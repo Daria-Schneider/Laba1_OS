@@ -1,0 +1,425 @@
+\section{Исходная программа}
+
+\begin{lstlisting}[language=C]
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+#include "cross_platform.h"
+#include "string_utils.h"
+
+#define BUFFER_SIZE 1024
+
+int main(void) {
+    process_t child;
+    char line[BUFFER_SIZE];
+    char childBuf[BUFFER_SIZE];
+    int bytes;
+
+    memset(&child, 0, sizeof(child));
+
+    const char *childPath = CpGetChildProcessName("child");
+
+    if (CpProcessCreate(&child, childPath) != 0) {
+        fprintf(stderr, "Error: failed to create child process\n");
+        return EXIT_FAILURE;
+    }
+
+    printf("Enter file name: ");
+    if (!fgets(line, sizeof(line), stdin)) {
+        fprintf(stderr, "Error: failed to read file name\n");
+        CpProcessClose(&child);
+        return EXIT_FAILURE;
+    }
+    TrimNewline(line);
+
+    if (CpProcessWrite(&child, line, strlen(line)) < 0 ||
+        CpProcessWrite(&child, "\n", 1) < 0) {
+        fprintf(stderr, "Error: failed to send file name to child process\n");
+        CpProcessClose(&child);
+        return EXIT_FAILURE;
+    }
+
+    bytes = CpProcessRead(&child, childBuf, (int)sizeof(childBuf) - 1);
+    if (bytes > 0) {
+        if (bytes > (int)sizeof(childBuf) - 1) bytes = (int)sizeof(childBuf) - 1;
+        childBuf[bytes] = '\0';
+        printf("%s", childBuf);
+        if (CpStringContains(childBuf, "Error:")) {
+            CpProcessClose(&child);
+            return EXIT_FAILURE;
+        }
+    }
+
+    while (1) {
+        printf("Enter string (empty string to exit): ");
+        if (!fgets(line, sizeof(line), stdin)) break;
+        TrimNewline(line);
+
+        if (CpStringLength(line) == 0) {
+            CpProcessWrite(&child, "\n", 1);
+            break;
+        }
+
+        if (CpProcessWrite(&child, line, strlen(line)) < 0 ||
+            CpProcessWrite(&child, "\n", 1) < 0) {
+            fprintf(stderr, "Error: failed to send string to child process\n");
+            break;
+        }
+
+        bytes = CpProcessRead(&child, childBuf, (int)sizeof(childBuf) - 1);
+        if (bytes > 0) {
+            if (bytes > (int)sizeof(childBuf) - 1) bytes = (int)sizeof(childBuf) - 1;
+            childBuf[bytes] = '\0';
+            printf("%s", childBuf);
+        }
+    }
+
+    CpProcessClose(&child);
+    printf("Parent process finished.\n");
+    return EXIT_SUCCESS;
+}
+\end{lstlisting}
+Листинг 1: parent.c - Родительский процесс, который запускает дочерний, передаёт ему имя файла и строки для записи
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "string_utils.h"
+
+#define BUFFER_SIZE 1024
+
+int main(void) {
+    char buffer[BUFFER_SIZE];
+    FILE* file = NULL;
+
+    if (!fgets(buffer, sizeof(buffer), stdin)) {
+        const char* err = "Error: failed to read file name\n";
+        printf("%s", err); fflush(stdout);
+        return EXIT_FAILURE;
+    }
+    TrimNewline(buffer);
+
+    file = fopen(buffer, "w");
+    if (file == NULL) {
+        char err[BUFFER_SIZE];
+        snprintf(err, sizeof(err), "Error: cannot open file '%s' for writing\n", buffer);
+        printf("%s", err); fflush(stdout);
+        return EXIT_FAILURE;
+    }
+
+    printf("File opened successfully\n");
+    fflush(stdout);
+
+    while (fgets(buffer, sizeof(buffer), stdin)) {
+        TrimNewline(buffer);
+        if (strlen(buffer) == 0) {
+            break;
+        }
+
+        if (IsCapitalStart(buffer)) {
+            fprintf(file, "%s\n", buffer);
+            fflush(file);
+            char ok[BUFFER_SIZE];
+            snprintf(ok, sizeof(ok), "String written to file: '%s'\n", buffer);
+            printf("%s", ok);
+            fflush(stdout);
+        } else {
+            char err[BUFFER_SIZE];
+            snprintf(err, sizeof(err), "Error: string must start with capital letter - '%s'\n", buffer);
+            printf("%s", err);
+            fflush(stdout);
+        }
+    }
+
+    if (file) fclose(file);
+    printf("Child process finished\n");
+    fflush(stdout);
+    return EXIT_SUCCESS;
+}
+\end{lstlisting}
+Листинг 2: child.c - Дочерний процесс, который получает от родителя имя файла и записывает в него строки, начинающиеся с заглавной буквы
+
+\begin{lstlisting}[language=C]
+#include "stringutils.h"
+#include <string.h>
+#include <ctype.h>
+
+void TrimNewline(char* str) {
+    if (!str) return;
+    size_t len = strlen(str);
+    if (len > 0 && str[len - 1] == '\n') str[len - 1] = '\0';
+}
+
+int IsCapitalStart(const char* str) {
+    if (!str || *str == '\0') return 0;
+    return isupper((unsigned char)str[0]) != 0;
+}
+
+size_t CpStringLength(const char* str) {
+    return strlen(str);
+}
+
+int CpStringContains(const char* str, const char* substr) {
+    if (!str || !substr) return 0;
+    return strstr(str, substr) != NULL;
+}
+\end{lstlisting}
+Листинг 3: stringutils.c - Реализация функций для обработки строк и проверки условий форматирования
+
+\begin{lstlisting}[language=C]
+#include "crossplatform.h"
+#include <stdlib.h>
+
+#ifdef _WIN32
+#include <windows.h>
+
+int CpProcessCreate(process_t* proc, const char* path) {
+    if (!proc || !path) return -1;
+
+    SECURITY_ATTRIBUTES sa;
+    sa.nLength = sizeof(SECURITY_ATTRIBUTES);
+    sa.bInheritHandle = TRUE;
+    sa.lpSecurityDescriptor = NULL;
+
+    HANDLE childStdoutRead = NULL;
+    HANDLE childStdoutWrite = NULL;
+    HANDLE childStdinRead = NULL;
+    HANDLE childStdinWrite = NULL;
+
+    if (!CreatePipe(&childStdoutRead, &childStdoutWrite, &sa, 0)) return -1;
+    if (!CreatePipe(&childStdinRead, &childStdinWrite, &sa, 0)) {
+        CloseHandle(childStdoutRead);
+        CloseHandle(childStdoutWrite);
+        return -1;
+    }
+
+    SetHandleInformation(childStdoutRead, HANDLE_FLAG_INHERIT, 0);
+    SetHandleInformation(childStdinWrite, HANDLE_FLAG_INHERIT, 0);
+
+    STARTUPINFOA si;
+    PROCESS_INFORMATION pi;
+    ZeroMemory(&si, sizeof(si));
+    si.cb = sizeof(si);
+    si.hStdError = childStdoutWrite;
+    si.hStdOutput = childStdoutWrite;
+    si.hStdInput = childStdinRead;
+    si.dwFlags |= STARTF_USESTDHANDLES;
+
+    char cmdline[1024];
+    strncpy(cmdline, path, sizeof(cmdline)-1);
+    cmdline[sizeof(cmdline)-1] = '\0';
+
+    if (!CreateProcessA(NULL, cmdline, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi)) {
+        CloseHandle(childStdoutRead);
+        CloseHandle(childStdoutWrite);
+        CloseHandle(childStdinRead);
+        CloseHandle(childStdinWrite);
+        return -1;
+    }
+
+    CloseHandle(childStdoutWrite);
+    CloseHandle(childStdinRead);
+
+    proc->handle = pi.hProcess;
+    proc->stdinWrite = childStdinWrite;
+    proc->stdoutRead = childStdoutRead;
+
+    CloseHandle(pi.hThread);
+    return 0;
+}
+
+int CpProcessWrite(process_t* proc, const char* data, size_t size) {
+    if (!proc || !data) return -1;
+    DWORD written = 0;
+    if (!WriteFile(proc->stdinWrite, data, (DWORD)size, &written, NULL)) {
+        return -1;
+    }
+    return (int)written;
+}
+
+int CpProcessRead(process_t* proc, char* buffer, size_t size) {
+    if (!proc || !buffer || size == 0) return -1;
+    DWORD readBytes = 0;
+    if (!ReadFile(proc->stdoutRead, buffer, (DWORD)(size - 1), &readBytes, NULL)) {
+        return -1;
+    }
+    buffer[readBytes] = '\0';
+    return (int)readBytes;
+}
+
+int CpProcessClose(process_t* proc) {
+    if (!proc) return -1;
+    int exitCode = -1;
+    if (proc->stdinWrite) {
+        CloseHandle(proc->stdinWrite);
+        proc->stdinWrite = NULL;
+    }
+    if (proc->stdoutRead) {
+        CloseHandle(proc->stdoutRead);
+        proc->stdoutRead = NULL;
+    }
+    if (proc->handle) {
+        WaitForSingleObject(proc->handle, INFINITE);
+        DWORD code;
+        if (GetExitCodeProcess(proc->handle, &code)) {
+            exitCode = (int)code;
+        }
+        CloseHandle(proc->handle);
+        proc->handle = NULL;
+    }
+    return exitCode;
+}
+
+#else
+
+#include <unistd.h>
+#include <sys/wait.h>
+#include <errno.h>
+
+int CpProcessCreate(process_t* proc, const char* path) {
+    if (!proc || !path) return -1;
+    int inpipe[2];
+    int outpipe[2];
+
+    if (pipe(inpipe) == -1) return -1;
+    if (pipe(outpipe) == -1) {
+        close(inpipe[0]); close(inpipe[1]);
+        return -1;
+    }
+
+    pid_t pid = fork();
+    if (pid == -1) {
+        close(inpipe[0]); close(inpipe[1]);
+        close(outpipe[0]); close(outpipe[1]);
+        return -1;
+    }
+
+    if (pid == 0) {
+        dup2(inpipe[0], STDIN_FILENO);
+        dup2(outpipe[1], STDOUT_FILENO);
+
+        close(inpipe[0]); close(inpipe[1]);
+        close(outpipe[0]); close(outpipe[1]);
+
+        execl(path, path, (char*)NULL);
+        _exit(127);
+    } else {
+        close(inpipe[0]);
+        close(outpipe[1]);
+        proc->pid = pid;
+        proc->stdin_fd = inpipe[1];
+        proc->stdout_fd = outpipe[0];
+        return 0;
+    }
+}
+
+int CpProcessWrite(process_t* proc, const char* data, size_t size) {
+    if (!proc || !data) return -1;
+    ssize_t n = write(proc->stdin_fd, data, size);
+    if (n == -1) return -1;
+    return (int)n;
+}
+
+int CpProcessRead(process_t* proc, char* buffer, size_t size) {
+    if (!proc || !buffer || size == 0) return -1;
+    ssize_t n = read(proc->stdout_fd, buffer, (ssize_t)(size - 1));
+    if (n == -1) return -1;
+    if (n == 0) {
+        buffer[0] = '\0';
+        return 0;
+    }
+    buffer[n] = '\0';
+    return (int)n;
+}
+
+int CpProcessClose(process_t* proc) {
+    if (!proc) return -1;
+    int status = -1;
+    if (proc->stdin_fd != -1) {
+        close(proc->stdin_fd);
+        proc->stdin_fd = -1;
+    }
+    if (proc->stdout_fd != -1) {
+        close(proc->stdout_fd);
+        proc->stdout_fd = -1;
+    }
+    if (proc->pid > 0) {
+        waitpid(proc->pid, &status, 0);
+        if (WIFEXITED(status)) return WEXITSTATUS(status);
+    }
+    return -1;
+}
+
+#endif
+\end{lstlisting}
+Листинг 4: crossplatform.c - Реализация создания дочернего процесса с перенаправлением ввода-вывода для Windows и Linux
+
+\begin{lstlisting}[language=C]
+#ifndef STRING_UTILS_H
+#define STRING_UTILS_H
+
+#include <stddef.h>
+
+void TrimNewline(char* str);
+int  IsCapitalStart(const char* str);
+
+size_t CpStringLength(const char* str);
+int    CpStringContains(const char* str, const char* substr);
+
+#endif
+\end{lstlisting}
+Листинг 5: stringutils.h - Заголовок с утилитами для обработки строк: обрезка переводов строк и проверка заглавной буквы
+
+\begin{lstlisting}[language=C]
+#ifndef CROSS_PLATFORM_H
+#define CROSS_PLATFORM_H
+
+#include <stddef.h>
+#include <stdio.h>
+#include <string.h>
+
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <sys/types.h>
+#endif
+
+#ifdef _WIN32
+typedef struct {
+    HANDLE handle;
+    HANDLE stdinWrite;
+    HANDLE stdoutRead;
+} process_t;
+#else
+typedef struct {
+    pid_t pid;
+    int stdin_fd;
+    int stdout_fd;
+} process_t;
+#endif
+
+int  CpProcessCreate(process_t* proc, const char* path);
+int  CpProcessWrite(process_t* proc, const char* data, size_t size);
+int  CpProcessRead(process_t* proc, char* buffer, size_t size);
+int  CpProcessClose(process_t* proc);
+
+size_t CpStringLength(const char* str);
+int    CpStringContains(const char* str, const char* substr);
+
+static inline const char* CpGetChildProcessName(const char* baseName) {
+    (void)baseName;
+#ifdef _WIN32
+    return "child.exe";
+#else
+    return "./child";
+#endif
+}
+
+#define CpWriteStdout(data, size) ((int)fwrite((data), 1, (size), stdout))
+#define CpWriteStderr(data, size) ((int)fwrite((data), 1, (size), stderr))
+
+#endif
+\end{lstlisting}
+Листинг 6: crossplatform.h - Кроссплатформенный заголовок с API для работы с процессами и строками в Windows/POSIX
