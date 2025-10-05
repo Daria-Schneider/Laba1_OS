@@ -1,0 +1,26 @@
+[
+{
+  "directory": "C:/Users/Daria/Desktop/Laba1_OS/build",
+  "command": "C:\\Users\\Daria\\gcc\\bin\\gcc.exe -IC:/Users/Daria/Desktop/Laba1_OS/include -g -std=gnu99 -o CMakeFiles\\crossplatform.dir\\src\\crossplatform.c.obj -c C:\\Users\\Daria\\Desktop\\Laba1_OS\\src\\crossplatform.c",
+  "file": "C:/Users/Daria/Desktop/Laba1_OS/src/crossplatform.c",
+  "output": "C:/Users/Daria/Desktop/Laba1_OS/build/CMakeFiles/crossplatform.dir/src/crossplatform.c.obj"
+},
+{
+  "directory": "C:/Users/Daria/Desktop/Laba1_OS/build",
+  "command": "C:\\Users\\Daria\\gcc\\bin\\gcc.exe -IC:/Users/Daria/Desktop/Laba1_OS/include -g -std=gnu99 -o CMakeFiles\\crossplatform.dir\\src\\stringutils.c.obj -c C:\\Users\\Daria\\Desktop\\Laba1_OS\\src\\stringutils.c",
+  "file": "C:/Users/Daria/Desktop/Laba1_OS/src/stringutils.c",
+  "output": "C:/Users/Daria/Desktop/Laba1_OS/build/CMakeFiles/crossplatform.dir/src/stringutils.c.obj"
+},
+{
+  "directory": "C:/Users/Daria/Desktop/Laba1_OS/build",
+  "command": "C:\\Users\\Daria\\gcc\\bin\\gcc.exe -IC:/Users/Daria/Desktop/Laba1_OS/include -g -std=gnu99 -o CMakeFiles\\parent.dir\\src\\parent.c.obj -c C:\\Users\\Daria\\Desktop\\Laba1_OS\\src\\parent.c",
+  "file": "C:/Users/Daria/Desktop/Laba1_OS/src/parent.c",
+  "output": "C:/Users/Daria/Desktop/Laba1_OS/build/CMakeFiles/parent.dir/src/parent.c.obj"
+},
+{
+  "directory": "C:/Users/Daria/Desktop/Laba1_OS/build",
+  "command": "C:\\Users\\Daria\\gcc\\bin\\gcc.exe -IC:/Users/Daria/Desktop/Laba1_OS/include -g -std=gnu99 -o CMakeFiles\\child.dir\\src\\child.c.obj -c C:\\Users\\Daria\\Desktop\\Laba1_OS\\src\\child.c",
+  "file": "C:/Users/Daria/Desktop/Laba1_OS/src/child.c",
+  "output": "C:/Users/Daria/Desktop/Laba1_OS/build/CMakeFiles/child.dir/src/child.c.obj"
+}
+]

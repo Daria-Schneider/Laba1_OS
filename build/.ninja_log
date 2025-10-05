@@ -1,0 +1,8 @@
+# ninja log v5
+6	97	7814035669167119	CMakeFiles/crossplatform.dir/src/stringutils.c.obj	78ff5607f40f6603
+13	115	7814035669367919	CMakeFiles/child.dir/src/child.c.obj	8786ae22f0960c85
+10	732	7814035675539095	CMakeFiles/parent.dir/src/parent.c.obj	dab3e29215f54418
+2	738	7814035675609473	CMakeFiles/crossplatform.dir/src/crossplatform.c.obj	f75fe622569ba9a4
+739	805	7814035676282713	lib/libcrossplatform.a	5e1a6bc94d9a6bc0
+806	966	7814035677845009	parent.exe	7f360a82ede7038f
+811	974	7814035677915015	child.exe	1009d26e8c8652f8
