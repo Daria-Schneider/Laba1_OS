@@ -423,3 +423,251 @@ static inline const char* CpGetChildProcessName(const char* baseName) {
 #endif
 \end{lstlisting}
 Листинг 6: crossplatform.h - Кроссплатформенный заголовок с API для работы с процессами и строками в Windows/POSIX
+
+
+\section{Системные вызовы}
+
+\begin{verbatim}
+21:48:42,4885870	parent.exe	8160	Process Start		SUCCESS	Parent PID: 14312, Command line: "C:\Users\Daria\Desktop\Laba1\_OS\build\parent.exe", Current directory: C:\Users\Daria\Desktop\Laba1\_OS\build\, Environment: 
+	ALLUSERSPROFILE=C:\ProgramData
+	APPDATA=C:\Users\Daria\AppData\Roaming
+	CHROME\_CRASHPAD\_PIPE\_NAME=\\.\pipe\crashpad\_13564\_ZJVNVLRYUFWWDDYB
+	CommonProgramFiles=C:\Program Files\Common Files
+	CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+	CommonProgramW6432=C:\Program Files\Common Files
+	COMPUTERNAME=DARIA-BOOK
+	ComSpec=C:\Windows\system32\cmd.exe
+	DriverData=C:\Windows\System32\Drivers\DriverData
+	HOMEDRIVE=C:
+	HOMEPATH=\Users\Daria
+	IGCCSVC\_DB=AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAHlemZZnUgUGo+uBSpkzCcQQAAAACAAAAAAAQZgAAAAEAACAAAAAGheQ77iPmtc43Jm4IeZuELG1JqvCkCB+xVgAUP47whQAAAAAOgAAAAAIAACAAAABMj9+8TlLfQ9W9Iecl3nFZjp7KG8VmScGEjoZp5FsSDmAAAAAPLAvQM3/IJ389G+paEwtbgKxSYMa8X5GYroKqT700ZDqpz430Bq93FfKbqsoTUHnh0F7bZHZeJ/ctxClovmUxkEUOgew3boiOn40kkQia7HJCUhUDbNXJPKInj7Uv3J5AAAAAoAs5CSF+DXmMDAnu0Gbi6WrHyM/UqJP0Xl42SbQLNc03HBuPdccbOi5G9Z2SBbx5fFolIZlAdfwXXDcGn/LvDw==
+	LOCALAPPDATA=C:\Users\Daria\AppData\Local
+	LOGONSERVER=\\DARIA-BOOK
+	NUMBER\_OF\_PROCESSORS=8
+	OneDrive=C:\Users\Daria\OneDrive
+	ORIGINAL\_XDG\_CURRENT\_DESKTOP=undefined
+	OS=Windows\_NT
+	Path=C:\Users\Daria\gcc\bin;C:\Users\Daria\gcc\libexec\gcc\x86\_64-w64-mingw32\14.1.0;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\7-Zip;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\CMake\bin;C:\Users\Daria\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\Daria\AppData\Local\Programs\Python\Python310\;C:\Users\Daria\AppData\Local\Microsoft\WindowsApps;C:\Users\Daria\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Daria\AppData\Roaming\npm;C:\mingw64\bin;
+	PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+	PROCESSOR\_ARCHITECTURE=AMD64
+	PROCESSOR\_IDENTIFIER=Intel64 Family 6 Model 154 Stepping 4, GenuineIntel
+	PROCESSOR\_LEVEL=6
+	PROCESSOR\_REVISION=9a04
+	ProgramData=C:\ProgramData
+	ProgramFiles=C:\Program Files
+	ProgramFiles(x86)=C:\Program Files (x86)
+	ProgramW6432=C:\Program Files
+	PSModulePath=C:\Users\Daria\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+	PUBLIC=C:\Users\Public
+	SESSIONNAME=Console
+	SystemDrive=C:
+	SystemRoot=C:\Windows
+	TEMP=C:\Users\Daria\AppData\Local\Temp
+	TMP=C:\Users\Daria\AppData\Local\Temp
+	USERDOMAIN=DARIA-BOOK
+	USERDOMAIN\_ROAMINGPROFILE=DARIA-BOOK
+	USERNAME=Daria
+	USERPROFILE=C:\Users\Daria
+	VBOX\_MSI\_INSTALL\_PATH=C:\Program Files\Oracle\VirtualBox\
+	VSCODE\_PYTHON\_AUTOACTIVATE\_GUARD=1
+	windir=C:\Windows
+	ZES\_ENABLE\_SYSMAN=1
+	TERM\_PROGRAM=vscode
+	TERM\_PROGRAM\_VERSION=1.104.3
+	LANG=en\_US.UTF-8
+	COLORTERM=truecolor
+	GIT\_ASKPASS=c:\Users\Daria\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass.sh
+	VSCODE\_GIT\_ASKPASS\_NODE=C:\Users\Daria\AppData\Local\Programs\Microsoft VS Code\Code.exe
+	VSCODE\_GIT\_ASKPASS\_EXTRA\_ARGS=
+	VSCODE\_GIT\_ASKPASS\_MAIN=c:\Users\Daria\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass-main.js
+	VSCODE\_GIT\_IPC\_HANDLE=\\.\pipe\vscode-git-237d24c1bf-sock
+	VSCODE\_INJECTION=1
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+	PROCESSOR_ARCHITECTURE=AMD64
+	PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 154 Stepping 4, GenuineIntel
+	PROCESSOR_LEVEL=6
+	PROCESSOR_REVISION=9a04
+	ProgramData=C:\ProgramData
+	ProgramFiles=C:\Program Files
+	ProgramFiles(x86)=C:\Program Files (x86)
+	ProgramW6432=C:\Program Files
+	PSModulePath=C:\Users\Daria\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+	PUBLIC=C:\Users\Public
+	SESSIONNAME=Console
+	SystemDrive=C:
+	SystemRoot=C:\Windows
+	TEMP=C:\Users\Daria\AppData\Local\Temp
+	TMP=C:\Users\Daria\AppData\Local\Temp
+	USERDOMAIN=DARIA-BOOK
+	USERDOMAIN_ROAMINGPROFILE=DARIA-BOOK
+	USERNAME=Daria
+	USERPROFILE=C:\Users\Daria
+	VBOX_MSI_INSTALL_PATH=C:\Program Files\Oracle\VirtualBox\
+	VSCODE_PYTHON_AUTOACTIVATE_GUARD=1
+	windir=C:\Windows
+	ZES_ENABLE_SYSMAN=1
+	TERM_PROGRAM=vscode
+	TERM_PROGRAM_VERSION=1.104.3
+	LANG=en_US.UTF-8
+	COLORTERM=truecolor
+	GIT_ASKPASS=c:\Users\Daria\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass.sh
+	VSCODE_GIT_ASKPASS_NODE=C:\Users\Daria\AppData\Local\Programs\Microsoft VS Code\Code.exe
+	VSCODE_GIT_ASKPASS_EXTRA_ARGS=
+	VSCODE_GIT_ASKPASS_MAIN=c:\Users\Daria\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass-main.js
+	VSCODE_GIT_IPC_HANDLE=\\.\pipe\vscode-git-237d24c1bf-sock
+	VSCODE_INJECTION=1
+21:48:42,4885956	parent.exe	8160	Thread Create		SUCCESS	Thread ID: 2720
+21:48:42,4900396	parent.exe	8160	Load Image	C:\Users\Daria\Desktop\Laba1_OS\build\parent.exe	SUCCESS	Image Base: 0x7ff795350000, Image Size: 0x1d000
+21:48:42,4901192	parent.exe	8160	Load Image	C:\Windows\System32\ntdll.dll	SUCCESS	Image Base: 0x7ff94b5f0000, Image Size: 0x1f8000
+21:48:42,4902441	parent.exe	8160	CreateFile	C:\Windows\Prefetch\PARENT.EXE-FCCDEEFD.pf	SUCCESS	Desired Access: Generic Read, Disposition: Open, Options: Synchronous IO Non-Alert, Attributes: n/a, ShareMode: None, AllocationSize: n/a, OpenResult: Opened
+21:48:42,4903356	parent.exe	8160	QueryEAFile	C:\Windows\Prefetch\PARENT.EXE-FCCDEEFD.pf	SUCCESS	
+21:48:42,4919392	parent.exe	8160	QueryStandardInformationFile	C:\Windows\Prefetch\PARENT.EXE-FCCDEEFD.pf	SUCCESS	AllocationSize: 4 096, EndOfFile: 2 234, NumberOfLinks: 1, DeletePending: False, Directory: False
+21:48:42,4919783	parent.exe	8160	ReadFile	C:\Windows\Prefetch\PARENT.EXE-FCCDEEFD.pf	SUCCESS	Offset: 0, Length: 2 234, Priority: Normal
+21:48:42,4920718	parent.exe	8160	CloseFile	C:\Windows\Prefetch\PARENT.EXE-FCCDEEFD.pf	SUCCESS	
+21:48:42,4980793	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Session Manager	REPARSE	Desired Access: Query Value
+21:48:42,4981636	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Session Manager	SUCCESS	Desired Access: Query Value
+21:48:42,4982372	parent.exe	8160	RegQueryValue	HKLM\System\CurrentControlSet\Control\Session Manager\RaiseExceptionOnPossibleDeadlock	NAME NOT FOUND	Length: 80
+21:48:42,4982955	parent.exe	8160	RegCloseKey	HKLM\System\CurrentControlSet\Control\Session Manager	SUCCESS	
+21:48:42,4983449	parent.exe	8160	RegOpenKey	HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Segment Heap	REPARSE	Desired Access: Query Value
+21:48:42,4983872	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Session Manager\Segment Heap	NAME NOT FOUND	Desired Access: Query Value
+21:48:42,4985434	parent.exe	8160	RegOpenKey	HKLM\SYSTEM\CurrentControlSet\Control\Session Manager	REPARSE	Desired Access: Query Value, Enumerate Sub Keys
+21:48:42,4985848	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Session Manager	SUCCESS	Desired Access: Query Value, Enumerate Sub Keys
+21:48:42,4986333	parent.exe	8160	RegQueryValue	HKLM\System\CurrentControlSet\Control\Session Manager\ResourcePolicies	NAME NOT FOUND	Length: 24
+21:48:42,4986789	parent.exe	8160	RegCloseKey	HKLM\System\CurrentControlSet\Control\Session Manager	SUCCESS	
+21:48:42,4999036	parent.exe	8160	CreateFile	C:\Users\Daria\Desktop\Laba1_OS\build	SUCCESS	Desired Access: Execute/Traverse, Synchronize, Disposition: Open, Options: Directory, Synchronous IO Non-Alert, Attributes: n/a, ShareMode: Read, Write, AllocationSize: n/a, OpenResult: Opened
+21:48:42,5002184	parent.exe	8160	Load Image	C:\Windows\System32\kernel32.dll	SUCCESS	Image Base: 0x7ff94a500000, Image Size: 0xc2000
+21:48:42,5008626	parent.exe	8160	Load Image	C:\Windows\System32\KernelBase.dll	SUCCESS	Image Base: 0x7ff949320000, Image Size: 0x2f6000
+21:48:42,5030290	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\StateSeparation\RedirectionMap\Keys	REPARSE	Desired Access: Read
+21:48:42,5031129	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\StateSeparation\RedirectionMap\Keys	NAME NOT FOUND	Desired Access: Read
+21:48:42,5035208	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Terminal Server	REPARSE	Desired Access: Read
+21:48:42,5035820	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Terminal Server	SUCCESS	Desired Access: Read
+21:48:42,5036464	parent.exe	8160	RegQueryValue	HKLM\System\CurrentControlSet\Control\Terminal Server\TSAppCompat	NAME NOT FOUND	Length: 548
+21:48:42,5036831	parent.exe	8160	RegQueryValue	HKLM\System\CurrentControlSet\Control\Terminal Server\TSUserEnabled	SUCCESS	Type: REG_DWORD, Length: 4, Data: 0
+21:48:42,5037290	parent.exe	8160	RegCloseKey	HKLM\System\CurrentControlSet\Control\Terminal Server	SUCCESS	
+21:48:42,5041959	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\SafeBoot\Option	REPARSE	Desired Access: Query Value, Set Value
+21:48:42,5042414	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\SafeBoot\Option	NAME NOT FOUND	Desired Access: Query Value, Set Value
+21:48:42,5042881	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Srp\GP\DLL	REPARSE	Desired Access: Read
+21:48:42,5043213	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Srp\GP\DLL	NAME NOT FOUND	Desired Access: Read
+21:48:42,5043612	parent.exe	8160	RegOpenKey	HKLM\Software\Policies\Microsoft\Windows\Safer\CodeIdentifiers	SUCCESS	Desired Access: Query Value
+21:48:42,5044164	parent.exe	8160	RegQueryValue	HKLM\SOFTWARE\Policies\Microsoft\Windows\safer\codeidentifiers\TransparentEnabled	NAME NOT FOUND	Length: 80
+21:48:42,5044591	parent.exe	8160	RegCloseKey	HKLM\SOFTWARE\Policies\Microsoft\Windows\safer\codeidentifiers	SUCCESS	
+21:48:42,5045119	parent.exe	8160	RegOpenKey	HKCU\Software\Policies\Microsoft\Windows\Safer\CodeIdentifiers	NAME NOT FOUND	Desired Access: Query Value
+21:48:42,5045967	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\FileSystem\	REPARSE	Desired Access: Read
+21:48:42,5046305	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\FileSystem	SUCCESS	Desired Access: Read
+21:48:42,5046661	parent.exe	8160	RegQueryValue	HKLM\System\CurrentControlSet\Control\FileSystem\LongPathsEnabled	SUCCESS	Type: REG_DWORD, Length: 4, Data: 1
+21:48:42,5047033	parent.exe	8160	RegCloseKey	HKLM\System\CurrentControlSet\Control\FileSystem	SUCCESS	
+21:48:42,5047645	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\FileSystem\	REPARSE	Desired Access: Read
+21:48:42,5047971	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\FileSystem	SUCCESS	Desired Access: Read
+21:48:42,5048322	parent.exe	8160	RegQueryValue	HKLM\System\CurrentControlSet\Control\FileSystem\LPGO	NAME NOT FOUND	Length: 20
+21:48:42,5048656	parent.exe	8160	RegCloseKey	HKLM\System\CurrentControlSet\Control\FileSystem	SUCCESS	
+21:48:42,5053352	parent.exe	8160	Load Image	C:\Windows\System32\msvcrt.dll	SUCCESS	Image Base: 0x7ff94b180000, Image Size: 0x9e000
+21:48:42,5056977	parent.exe	8160	Thread Create		SUCCESS	Thread ID: 15944
+21:48:42,5066633	parent.exe	8160	RegOpenKey	HKLM\SYSTEM\CurrentControlSet\Control\Session Manager	REPARSE	Desired Access: Query Value, Enumerate Sub Keys
+21:48:42,5067330	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Session Manager	SUCCESS	Desired Access: Query Value, Enumerate Sub Keys
+21:48:42,5067971	parent.exe	8160	RegQueryValue	HKLM\System\CurrentControlSet\Control\Session Manager\ResourcePolicies	NAME NOT FOUND	Length: 24
+21:48:42,5068444	parent.exe	8160	RegCloseKey	HKLM\System\CurrentControlSet\Control\Session Manager	SUCCESS	
+21:48:42,5070321	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Nls\Sorting\Versions	REPARSE	Desired Access: Read
+21:48:42,5070754	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Nls\Sorting\Versions	SUCCESS	Desired Access: Read
+21:48:42,5071311	parent.exe	8160	RegQueryValue	HKLM\System\CurrentControlSet\Control\Nls\Sorting\Versions\(Default)	SUCCESS	Type: REG_SZ, Length: 18, Data: 00060305
+21:48:42,5071728	parent.exe	8160	RegQueryValue	HKLM\System\CurrentControlSet\Control\Nls\Sorting\Versions\000603xx	SUCCESS	Type: REG_SZ, Length: 26, Data: kernel32.dll
+21:48:42,5075709	parent.exe	8160	ReadFile	C:\Users\Daria\Desktop\Laba1_OS\build\parent.exe	SUCCESS	Offset: 45 056, Length: 1 536, I/O Flags: Non-cached, Paging I/O, Synchronous Paging I/O, Priority: Normal
+21:48:42,5080572	parent.exe	8160	ReadFile	C:\Users\Daria\Desktop\Laba1_OS\build\parent.exe	SUCCESS	Offset: 46 592, Length: 1 536, I/O Flags: Non-cached, Paging I/O, Synchronous Paging I/O, Priority: Normal
+21:48:42,5083778	parent.exe	8160	QueryNameInformationFile	C:\Users\Daria\Desktop\Laba1_OS\build\parent.exe	SUCCESS	Name: \Users\Daria\Desktop\Laba1_OS\build\parent.exe
+21:48:42,5089737	parent.exe	8160	CreateFile	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	SUCCESS	Desired Access: Read Attributes, Disposition: Open, Options: Open Reparse Point, Attributes: n/a, ShareMode: Read, Write, Delete, AllocationSize: n/a, OpenResult: Opened
+21:48:42,5090084	parent.exe	8160	QueryBasicInformationFile	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	SUCCESS	CreationTime: 06.10.2025 0:39:27, LastAccessTime: 06.10.2025 21:36:42, LastWriteTime: 06.10.2025 0:39:27, ChangeTime: 06.10.2025 0:39:27, FileAttributes: A
+21:48:42,5090200	parent.exe	8160	CloseFile	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	SUCCESS	
+21:48:42,5091489	parent.exe	8160	CreateFile	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	SUCCESS	Desired Access: Read Attributes, Disposition: Open, Options: Open Reparse Point, Attributes: n/a, ShareMode: Read, Write, Delete, AllocationSize: n/a, OpenResult: Opened
+21:48:42,5091635	parent.exe	8160	QueryBasicInformationFile	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	SUCCESS	CreationTime: 06.10.2025 0:39:27, LastAccessTime: 06.10.2025 21:36:42, LastWriteTime: 06.10.2025 0:39:27, ChangeTime: 06.10.2025 0:39:27, FileAttributes: A
+21:48:42,5091709	parent.exe	8160	CloseFile	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	SUCCESS	
+21:48:42,5092834	parent.exe	8160	Load Image	C:\Windows\System32\sechost.dll	SUCCESS	Image Base: 0x7ff94a640000, Image Size: 0x9f000
+21:48:42,5094136	parent.exe	8160	Load Image	C:\Windows\System32\rpcrt4.dll	SUCCESS	Image Base: 0x7ff94b220000, Image Size: 0x120000
+21:48:42,5095895	parent.exe	8160	Load Image	C:\Windows\System32\bcrypt.dll	SUCCESS	Image Base: 0x7ff948d30000, Image Size: 0x27000
+21:48:42,5096701	parent.exe	8160	RegOpenKey	HKLM\SYSTEM\CurrentControlSet\Control\Session Manager	REPARSE	Desired Access: Query Value, Enumerate Sub Keys
+21:48:42,5096964	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Session Manager	SUCCESS	Desired Access: Query Value, Enumerate Sub Keys
+21:48:42,5097185	parent.exe	8160	RegQueryValue	HKLM\System\CurrentControlSet\Control\Session Manager\ResourcePolicies	NAME NOT FOUND	Length: 24
+21:48:42,5097408	parent.exe	8160	RegCloseKey	HKLM\System\CurrentControlSet\Control\Session Manager	SUCCESS	
+21:48:42,5098277	parent.exe	8160	Thread Create		SUCCESS	Thread ID: 3376
+21:48:42,5104985	parent.exe	8160	RegOpenKey	HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options	SUCCESS	Desired Access: Query Value, Enumerate Sub Keys
+21:48:42,5105223	parent.exe	8160	RegOpenKey	HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\child.exe	NAME NOT FOUND	Desired Access: Query Value, Enumerate Sub Keys
+21:48:42,5105358	parent.exe	8160	RegOpenKey	HKLM\Software\Microsoft\Wow64\x86\xtajit	NAME NOT FOUND	Desired Access: Query Value
+21:48:42,5106276	parent.exe	8160	CreateFile	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	SUCCESS	Desired Access: Read Data/List Directory, Execute/Traverse, Read Attributes, Synchronize, Disposition: Open, Options: Synchronous IO Non-Alert, Non-Directory File, Attributes: N, ShareMode: Read, Delete, AllocationSize: n/a, OpenResult: Opened
+21:48:42,5106612	parent.exe	8160	CreateFileMapping	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	FILE LOCKED WITH ONLY READERS	SyncType: SyncTypeCreateSection, PageProtection: PAGE_EXECUTE|PAGE_NOCACHE
+21:48:42,5106813	parent.exe	8160	CreateFileMapping	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	SUCCESS	SyncType: SyncTypeOther
+21:48:42,5107155	parent.exe	8160	RegOpenKey	HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\child.exe	NAME NOT FOUND	Desired Access: Query Value, Enumerate Sub Keys
+21:48:42,5107397	parent.exe	8160	QuerySecurityFile	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	SUCCESS	Information: Label
+21:48:42,5107881	parent.exe	8160	QueryNameInformationFile	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	SUCCESS	Name: \Users\Daria\Desktop\Laba1_OS\build\child.exe
+21:48:42,5170869	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Services\bam\State\UserSettings\S-1-5-21-1479966738-1025962532-1663167708-1002	SUCCESS	Desired Access: All Access
+21:48:42,5171188	parent.exe	8160	RegQueryValue	HKLM\System\CurrentControlSet\Services\bam\State\UserSettings\S-1-5-21-1479966738-1025962532-1663167708-1002\\Device\HarddiskVolume3\Users\Daria\Desktop\Laba1_OS\build\child.exe	NAME NOT FOUND	Length: 40
+21:48:42,5171454	parent.exe	8160	RegCloseKey	HKLM\System\CurrentControlSet\Services\bam\State\UserSettings\S-1-5-21-1479966738-1025962532-1663167708-1002	SUCCESS	
+21:48:42,5171633	parent.exe	8160	RegOpenKey	HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\BAM	REPARSE	Desired Access: Query Value
+21:48:42,5171843	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Session Manager\BAM	NAME NOT FOUND	Desired Access: Query Value
+21:48:42,5172409	parent.exe	8160	Process Create	C:\Users\Daria\Desktop\Laba1_OS\build\child.exe	SUCCESS	PID: 3208, Command line: child.exe
+21:48:42,5172485	child.exe	3208	Process Start		SUCCESS	Parent PID: 8160, Command line: child.exe, Current directory: C:\Users\Daria\Desktop\Laba1_OS\build\, Environment: 
+	ALLUSERSPROFILE=C:\ProgramData
+	APPDATA=C:\Users\Daria\AppData\Roaming
+	CHROME_CRASHPAD_PIPE_NAME=\\.\pipe\crashpad_13564_ZJVNVLRYUFWWDDYB
+	CommonProgramFiles=C:\Program Files\Common Files
+	CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+	CommonProgramW6432=C:\Program Files\Common Files
+	COMPUTERNAME=DARIA-BOOK
+	ComSpec=C:\Windows\system32\cmd.exe
+	DriverData=C:\Windows\System32\Drivers\DriverData
+	HOMEDRIVE=C:
+	HOMEPATH=\Users\Daria
+	IGCCSVC_DB=AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAHlemZZnUgUGo+uBSpkzCcQQAAAACAAAAAAAQZgAAAAEAACAAAAAGheQ77iPmtc43Jm4IeZuELG1JqvCkCB+xVgAUP47whQAAAAAOgAAAAAIAACAAAABMj9+8TlLfQ9W9Iecl3nFZjp7KG8VmScGEjoZp5FsSDmAAAAAPLAvQM3/IJ389G+paEwtbgKxSYMa8X5GYroKqT700ZDqpz430Bq93FfKbqsoTUHnh0F7bZHZeJ/ctxClovmUxkEUOgew3boiOn40kkQia7HJCUhUDbNXJPKInj7Uv3J5AAAAAoAs5CSF+DXmMDAnu0Gbi6WrHyM/UqJP0Xl42SbQLNc03HBuPdccbOi5G9Z2SBbx5fFolIZlAdfwXXDcGn/LvDw==
+	LOCALAPPDATA=C:\Users\Daria\AppData\Local
+	LOGONSERVER=\\DARIA-BOOK
+	NUMBER_OF_PROCESSORS=8
+	OneDrive=C:\Users\Daria\OneDrive
+	ORIGINAL_XDG_CURRENT_DESKTOP=undefined
+	OS=Windows_NT
+	Path=C:\Users\Daria\gcc\bin;C:\Users\Daria\gcc\libexec\gcc\x86_64-w64-mingw32\14.1.0;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\7-Zip;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\CMake\bin;C:\Users\Daria\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\Daria\AppData\Local\Programs\Python\Python310\;C:\Users\Daria\AppData\Local\Microsoft\WindowsApps;C:\Users\Daria\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Daria\AppData\Roaming\npm;C:\mingw64\bin;
+	PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+	PROCESSOR_ARCHITECTURE=AMD64
+	PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 154 Stepping 4, GenuineIntel
+	PROCESSOR_LEVEL=6
+	PROCESSOR_REVISION=9a04
+	ProgramData=C:\ProgramData
+	ProgramFiles=C:\Program Files
+	ProgramFiles(x86)=C:\Program Files (x86)
+	ProgramW6432=C:\Program Files
+	PSModulePath=C:\Users\Daria\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+	PUBLIC=C:\Users\Public
+	SESSIONNAME=Console
+	SystemDrive=C:
+	SystemRoot=C:\Windows
+	TEMP=C:\Users\Daria\AppData\Local\Temp
+	TMP=C:\Users\Daria\AppData\Local\Temp
+	USERDOMAIN=DARIA-BOOK
+	USERDOMAIN_ROAMINGPROFILE=DARIA-BOOK
+	USERNAME=Daria
+	USERPROFILE=C:\Users\Daria
+	VBOX_MSI_INSTALL_PATH=C:\Program Files\Oracle\VirtualBox\
+	VSCODE_PYTHON_AUTOACTIVATE_GUARD=1
+	windir=C:\Windows
+	ZES_ENABLE_SYSMAN=1
+	TERM_PROGRAM=vscode
+	TERM_PROGRAM_VERSION=1.104.3
+	LANG=en_US.UTF-8
+	COLORTERM=truecolor
+	GIT_ASKPASS=c:\Users\Daria\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass.sh
+	VSCODE_GIT_ASKPASS_NODE=C:\Users\Daria\AppData\Local\Programs\Microsoft VS Code\Code.exe
+	VSCODE_GIT_ASKPASS_EXTRA_ARGS=
+	VSCODE_GIT_ASKPASS_MAIN=c:\Users\Daria\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass-main.js
+	VSCODE_GIT_IPC_HANDLE=\\.\pipe\vscode-git-237d24c1bf-sock
+	VSCODE_INJECTION=1
+21:48:42,5172594	child.exe	3208	Thread Create		SUCCESS	Thread ID: 3648
+21:48:42,5173581	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Session Manager\AppCertDlls	REPARSE	Desired Access: Query Value
+21:48:42,5173888	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\Session Manager\AppCertDlls	NAME NOT FOUND	Desired Access: Query Value
+21:48:42,5174431	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\SafeBoot\Option	REPARSE	Desired Access: Query Value, Set Value
+21:48:42,5174681	parent.exe	8160	RegOpenKey	HKLM\System\CurrentControlSet\Control\SafeBoot\Option	NAME NOT FOUND	Desired Access: Query Value, Set Value
+21:48:42,5175013	parent.exe	8160	RegOpenKey	HKLM\Software\Policies\Microsoft\Windows\Safer\CodeIdentifiers	SUCCESS	Desired Access: Query Value
+21:48:42,5175422	parent.exe	8160	RegQueryValue	HKLM\SOFTWARE\Policies\Microsoft\Windows\safer\codeidentifiers\TransparentEnabled	NAME NOT FOUND	Length: 80
+21:48:42,5175628	parent.exe	8160	RegQueryValue	HKLM\SOFTWARE\Policies\Microsoft\Windows\safer\codeidentifiers\AuthenticodeEnabled	SUCCESS	Type: REG_DWORD, Length: 4, Data: 0
+21:48:42,5175881	parent.exe	8160	RegCloseKey	HKLM\SOFTWARE\Policies\Microsoft\Windows\safer\codeidentifiers	SUCCESS	
+21:48:42,5176211	parent.exe	8160	RegOpenKey	HKCU\Software\Policies\Microsoft\Windows\Safer\CodeIdentifiers	NAME NOT FOUND	Desired Access: Query Value
+21:48:42,5177515	parent.exe	8160	RegOpenKey	HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders	SUCCESS	Desired Access: Query Value
+21:48:42,5177868	parent.exe	8160	RegQueryValue	HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Cache	SUCCESS	Type: REG_SZ, Length: 114, Data: C:\Users\Daria\AppData\Local\Microsoft\Windows\INetCache
+21:48:42,5178207	parent.exe	8160	RegCloseKey	HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders	SUCCESS	
+21:48:42,517850
+\end{verbatim}
